@@ -52,11 +52,9 @@ def board_delete(request,id):
 def board_edit(request,id):
     board = Board.objects.get(pk=id)
     if request.method == 'POST':
-        # board.author = request.POST['author']
         board.title = request.POST['title']
         board.content = request.POST['content']
         board.board = Board(title=board.title, content=board.content)
         board.save()
-        # return redirect('/post/'+str(board.id))
     else:
         return render(request,'board/update.html',{'board':board})
