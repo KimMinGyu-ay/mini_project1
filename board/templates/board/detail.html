@@ -28,9 +28,7 @@
     <div class="row mt-3">
         <div class="col-auto mr-auto"></div>
         <div class="col-auto"> 
-            {% comment %} <a class="btn btn-info" href="/post/{{ board.id }}/update/" role="button">수정</a> {% endcomment %}
-            {% comment %} <a class="btn btn-info" href="/board_edit" role="button">수정</a> {% endcomment %}
-            <a class="btn btn-info" href="{% url 'board:board_edit' id=board.id %}" role="button">수정</a>
+            <a class="btn btn-info" href="/post/{{ board.id }}/update/" role="button">수정</a>
         </div>
         <div class="col-auto">
             <a href = "{% url 'board:board_delete' id=board.id %}" class = "btn btn-info">삭제</a>
@@ -40,3 +38,13 @@
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>
+
+
+
+{% comment %} <form method="POST">
+                {% csrf_token %}
+                <input class="btn btn-info" type="submit" 
+                value="수정하기" onclick="location.href='/edit/'">
+            </form> {% endcomment %}
+            {% comment %} <a href = "{% url 'board:board_update' id=board.id %}" class = "btn btn-info">수정</a> {% endcomment %}
+            {% comment %} <a href = "{% url 'board:board_update' id=board.id %}" class = "btn btn-info">수정</a> {% endcomment %}
