@@ -57,4 +57,4 @@ def board_edit(request,id):
         board.board = Board(title=board.title, content=board.content)
         board.save()
     else:
-        return render(request,'board/update.html',{'board':board})
+        return render(request,'board/update.html',{'board':board})#return
