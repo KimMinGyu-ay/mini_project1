@@ -49,14 +49,14 @@ def board_delete(request,id):
 
 
 #게시판 수정
-def board_update(request,id):
-    board =get_object_or_404(Board, pk=id)
+def board_edit(request,id):
+    board = Board.objects.get(pk=id)
     if request.method == 'POST':
         # board.author = request.POST['author']
         board.title = request.POST['title']
         board.content = request.POST['content']
-        board.board = Board( title=board.title, content=board.content)
+        board.board = Board(title=board.title, content=board.content)
         board.save()
-        return redirect('/post/'+str(board.id))
+        # return redirect('/post/'+str(board.id))
     else:
         return render(request,'board/update.html',{'board':board})

@@ -1,13 +1,14 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="ko">
 
 <head>
     <meta charset="UTF-8">
-    <title>게시판 - {{ board.title }}</title>
+    <title>게시판 - 글쓰기</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
+
+<body>
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
         <div class="container d-flex justify-content-between">
@@ -18,36 +19,43 @@
     </div>
 </header>
 <div class="container">
-    <form action="/post/" method="post">
+    <form action="/post" method="post">
         {% csrf_token %}
         <div class="form-group row">
             <label for="inputTitle" class="col-sm-2 col-form-label"><strong>제목</strong></label>
             <div class="col-sm-10">
-                <input type="text" name="title" class="form-control" id="inputTitle">
+                <input type="text" name="title" class="form-control" id="inputTitle" value={{board.title}}>
             </div>
         </div>
 
         <div class="form-group row">
             <label for="inputAuthor" class="col-sm-2 col-form-label"><strong>작성자</strong></label>
-            <div class="col-sm-10">
-                <input type="text" name="author" class="form-control" id="inputAuthor">
-            </div>
+            {% comment %} <label for="inputAuthor" class="col-sm-2 col-form-label"><strong>작성자</strong></label> {% endcomment %}
+             <div class="col-sm-10">
+                <input type="text" name="author" class="form-control" id="inputAuthor" value={{board.author}}>
+                {% comment %} <input type="text" name="author" class="form-control" id="inputAuthor" value={{board.author}}> {% endcomment %}
+            </div>  
         </div>
 
         <div class="form-group row">
             <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
             <div class="col-sm-10">
-                <textarea type="text" name="content" class="form-control" id="inputContent"></textarea>
+                <input type="text" name="content" class="form-control" id="inputContent" value={{board.content}}>
             </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-auto mr-auto"></div>
-                <div class="col-auto">
-                    <input class="btn btn-primary" type="submit" role="button" value="수정하기">
-                    <input class="btn btn-primary" type="submit" role="button" value="취소">
-                </div>
-            </div>
-           
         </div>
     </form>
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <input class="btn btn-primary" type="submit" role="button" value="수정하기">
+                <a href ="/post/{{board.id}}" input class="btn btn-primary" type="submit" role="button">취소</a>
+ 
+            </div>
+        </div>
+    </form>
+    
 </div>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>
+
+</html>
