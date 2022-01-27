@@ -11,6 +11,9 @@
 
 
 <body>
+{% include "board/navi_bar.html" %}
+{% block content %}
+{% endblock %}
     <header>
         <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
             <div class="container d-flex justify-content-between">
@@ -19,6 +22,14 @@
             </div>
         </div>
     </header>
+
+
+
+    <div>
+        {% include "board/side_bar.html" %}
+        {% block side %}
+        {% endblock %}
+    </div>
     <div class="container">
         <table class="table">
             <thead class="thead-light">
@@ -64,15 +75,17 @@
             {% endfor %}
             </ul>
     </div>
-        <div class="row">
-            <div class="col-auto mr-auto"></div>
-            <div class="col-auto">
-                <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
-            </div>
+
+    <div class="row">
+        <div class="col-auto mr-auto"></div>
+        <div class="col-auto">
+            <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
         </div>
-    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    {% include "board/bottom.html" %}
+    </div>
+</div>
+{% include "board/bottom.html" %}
 {% block bottom %}
 {% endblock %}
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 </body>
 </html>

@@ -30,5 +30,5 @@ urlpatterns = [
     path('chat/', include('chat.urls')),
     
     #gps urls
-    # path('gps/', include('gps.urls')),
+    path('gps/', include('gps.urls')),
 ]

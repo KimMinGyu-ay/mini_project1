@@ -18,6 +18,11 @@
         </div>
     </div>
 </header>
+
+{% include "board/side_bar.html" %}
+{% block side %}
+{% endblock %}
+
 <div class="container">
     <form action="{% url 'board:board_edit' board.id %}" method="post">
         {% csrf_token %}
