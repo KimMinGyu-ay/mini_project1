@@ -29,7 +29,7 @@ def signin(request):
         if user is not None:
             login(request,user)
             request.session['user_id'] = user.id           
-            return redirect('/index')
+            return redirect('/main')
         else:
             return HttpResponse('ERROR: Username or Password is incorrent.')
     else:
