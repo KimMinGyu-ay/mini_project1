@@ -1,17 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ko">
 <html>
-
 <head>
     <title>Login</title>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    {% comment %} <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"> {% endcomment %}
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 
 <body>
-    <div class="content container">
-        <header class="page-header">
+    {% include "board/navi_bar.html" %}
+    {% block content %}
+    {% endblock %}
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+            <div class="container d-flex justify-content-between">
+                <a href="/index/" class="navbar-brand d-flex align-items-center">
+                    <h2><strong>Login 화면</strong></h2>
+                </a>
+            </div>
+        </div>
+    </header>
+    {% block side %}
+    {% endblock %}  
+    <div class="content container" style="border:1px solid">
+        {% comment %} <header class="page-header">
             <h1>Login</h1>
-           
-        </header>
+
+        </header> {% endcomment %}
         <div class="row">
             <div class="col-md-16">
                 <form method="POST">
@@ -22,7 +39,7 @@
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+                        <input type="text" name="password" class="form-control" id="password" placeholder="Password">
                     </div>                    
                     <button type="submit" class="btn btn-default">Submit</button>
                     <a href= /member/signup><input type='button' class="btn btn-default" value='회원가입'></a>
