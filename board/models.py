@@ -6,6 +6,7 @@ from django.db import models
 # Create your models here.
 class Board(models.Model):
     #board_id = models.IntegerField(primary_key=True)
+    postno = models.IntegerField(primary_key=True, null=False, default=0)
     author = models.CharField(max_length=10, null=False) # 작성자 이름 
     title = models.CharField(max_length=100, null=False) # 게시판 제목
     content = models.TextField(null=False) # 내용
@@ -14,4 +15,8 @@ class Board(models.Model):
 
     #number = models.IntegerField(default=0)
     # image 넣어야하는데....
+    
+    class Meta:
+        db_table = 'board'
+        app_label = 'board'
 

@@ -62,11 +62,11 @@
 </head>
 
 <body>
-    {% comment %} {% include "gpsapp/nav.html" %}
+    {% include "board/navi_bar.html" %}
     {% block content %}
-    {% endblock %} {% endcomment %}
+    {% endblock %}
 
-    <header>
+    {% comment %} <header>
         <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
             <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
                 <strong>PET_TO_YOU</strong>
@@ -93,7 +93,7 @@
         </a>
 
         </div>
-    </header>
+    </header> {% endcomment %}
     
     <div id="address">
         <div id="map" style="width:0px;height:0px;position:relative;overflow:hidden;"></div>
