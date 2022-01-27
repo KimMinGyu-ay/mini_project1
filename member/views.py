@@ -9,8 +9,8 @@ from .forms import UserForm
 def signup(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
-        if form.is_valid():                              
-            new_user = User.objects.create_user(**form.cleaned_data)
+        if request.POST['password1'] == request.POST['password2']:
+            new_user = User.objects.create_user(username=request.POST['username'],password=request.POST['password1'],email=request.POST['email'])
             login(request, new_user)            
             return redirect('user_login')
         else:
@@ -30,7 +30,7 @@ def signin(request):
             login(request,user)            
             return redirect('/index')
         else:
-            return HttpResponse('Login failed. Try again.')
+            return HttpResponse('ERROR: Username or Password is incorrent.')
     else:
         form = LoginForm()
         return render(request,'video/user_login.html')
