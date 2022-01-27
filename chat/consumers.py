@@ -1,29 +1,32 @@
-import json
-from channels.generic.websocket import WebsocketConsumer
+from django.shortcuts import render
+from .models import Room, User
 
-class ChatConsumer(WebsocketConsumer):
-    def connect(self):
-        self.accept()
 
-    def disconnect(self, close_code):
-        pass
-        # async_to_sync(self.channel_layer.group_discard)(
-        #     self.room_group_name,
-        #     self.channel_name
-        # )
+# Create your views here.
+def index(request):
+    user_id = request.session.get('user')
+    user_name = User.objects.get(id = user_id)
 
-    def receive(self, text_data):
-        text_data_json = json.loads(text_data)
-        message = text_data_json['message']
+    ul = User.objects.exclude(id = user_id)
 
-        self.send(text_data=json.dumps({
-            'message': message
-        }))
-    # Receive message from room group
-    def chat_message(self, event):
-        message = event['message']
+    rl = {}
 
-        # Send message to WebSocket
-        self.send(text_data=json.dumps({
-            'message': message
-        }))
+    for u in ul:
+        s = user_name + u.username 
+        sorted(s)
+        rl[u.id] = s     
+    # user에 따른 고유한 채팅방 주소 생성
+
+    return render(request, 'chat/index.html', {
+        'me' : user_id,
+        'ul' : ul,
+        'rl' : rl
+    })
+
+def room(request, room_name):
+    return render(request, 'chat/room.html', {
+        'room_name': room_name
+    })
+
+def blank(request):
+    return render(request, 'chat/blank.html')
