@@ -33,6 +33,9 @@
         <div class="col-auto">
             <a href = "{% url 'board:board_delete' id=board.id %}" class = "btn btn-info">삭제</a>
         </div>
+        <div class="col-auto">
+        <a href ="/index/" class="btn btn-info" type="submit" role="button"> 취소</a>
+        </div>
     </div>
 </div>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
