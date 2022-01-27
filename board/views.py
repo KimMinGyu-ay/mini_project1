@@ -44,13 +44,21 @@ def post(request):
     else:
         return render(request,'board/post.html')
 
-# 게시판 상세보기
+# 게시판 상세보기 + session
 def detail(request, id):
-    try:
-        board = Board.objects.get(pk=id)
-    except Board.DoesNotExist:
-        raise Http404("Does not exist!")
-    return render(request, 'board/detail.html', {'board': board})
+    login_session =request.session.get('login_session', request.user.get_username())
+    context = {'login_session':login_session}
+    board = get_object_or_404(Board, pk=id)
+    context['board'] = board
+    print(board.author)
+    print(login_session)
+    print(context)
+    if board.author == login_session:
+        context['author'] = True
+    else:
+        context['author'] = False
+    return render(request, 'board/detail.html',context)
+
 
 # 게시판 삭제
 def board_delete(request,id):
@@ -78,3 +86,16 @@ def cancel(request,id):
     else:
         return render(request,'board/post.html',{"board":board})
     
+
+
+
+
+
+
+############### 기존 코드
+'''def detail(request, id):
+    try:
+        board = Board.objects.get(pk=id)
+    except Board.DoesNotExist:
+        raise Http404("Does not exist!")
+    return render(request, 'board/detail.html', {'board': board})'''
