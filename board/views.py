@@ -62,5 +62,5 @@ def board_edit(request,id):
         return render(request,'board/update.html',{'board':board})
 
 
-    def main(request):
-        return render(request,'board/main.html')
+def main(request):
+    return render(request,'board/main.html')
