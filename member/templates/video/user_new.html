@@ -13,14 +13,21 @@
     {% include "board/navi_bar.html" %}
     {% block content %}
     {% endblock %}
-    {% block side %}
-    {% endblock %}
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+            <div class="container d-flex justify-content-between">
+                <a href="/index/" class="navbar-brand d-flex align-items-center">
+                    <h2><strong>회원가입 화면</strong></h2>
+                </a>
+            </div>
+        </div>
+    </header>
     <div class="content container">
-        <header class="page-header">
-            <h1>회원 가입</h1>
-        </header>
         <div class="row">
-            <div class="col-md-16">
+            {% include "board/side_bar.html" %}
+            {% block side %}
+            {% endblock %}
+            <div class="col-md-8">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="form-group">
@@ -30,15 +37,15 @@
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input type="text" name="email" class="form-control" id="email" placeholder="Email">
+                    </div>                    
+                    <div class="form-group">
+                        <label for="password1">Password</label>
+                        <input type="password" name="password1" class="form-control" id="password2" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <label for="password">Password (8자리 이상)</label>
-                        <input type="text" name="password" class="form-control" id="password" placeholder="Password">
-                    </div>
-                    {% comment %} <div class="form-group">
-                        <label for="dognumber">dognumber</label>
-                        <input type="text" name="dognumber" class="form-control" id="dognumber" placeholder="dognumber">    
-                    </div> {% endcomment %}
+                        <label for="password2">Password</label>
+                        <input type="password" name="password2" class="form-control" id="password2" placeholder="re Password">
+                    </div>     
                     <button type="submit" class="btn btn-default">Submit</button>
                 </div>                
                 <img src="dogplay.jpg" width="1170" height="300"/>
