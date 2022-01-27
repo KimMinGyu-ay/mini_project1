@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,61 +7,69 @@
     <title>게시판 - 목록</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
+
+
+
 <body>
-{% include "board/navi_bar.html" %}
-{% block content %}
-{% endblock %}
-<header>
-    <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
-        <div class="container d-flex justify-content-between">
-            <a href="/index/" class="navbar-brand d-flex align-items-center">
-                <strong>게시판 목록</strong>
-            </a>
-        </div>
-    </div>
-</header>
-<div class="container">
-    <table class="table">
-        <thead class="thead-light">
-        <tr class="text-center">
-            <th scope="col">제목</th>
-            <th scope="col">내용</th>
-            <th scope="col">작성자</th>
-            <th scope="col">작성일</th>
-        </tr>
-        </thead>
-        {% comment %} 게시판 출력 {% endcomment %}
-        <tbody>
-        {% for board in boards %}
-        <tr class="text-center">
-            {% comment %} <th scope="row">
-                <span>{{ board.id }}</span>
-            </th>  {% endcomment %}
-            <td>
-                <span>{{ board.title }}</span>
-            </td>
-            <td>
-                <a href="/post/{{ board.id }}">
-                    <span>{{ board.content }}</span>
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+            <div class="container d-flex justify-content-between">
+                <a href="/index/" class="navbar-brand d-flex align-items-center"><strong> 게시판</strong>
                 </a>
-            </td>
-            <td>
-                <span>{{ board.author }}</span>
-            </td>
-            <td>
-                <span>{{ board.created_date | date:"Y-m-d h:i" }}</span>
-            </td>
-        </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-    <div class="row">
-        <div class="col-auto mr-auto"></div>
-        <div class="col-auto">
-            <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
+            </div>
         </div>
+    </header>
+    <div class="container">
+        <table class="table">
+            <thead class="thead-light">
+            <tr class="text-center">
+                <th scope="col">제목</th>
+                <th scope="col">내용</th>
+                <th scope="col">작성자</th>
+                <th scope="col">작성일</th>
+            </tr>
+            </thead>
+            {% comment %} 게시판 출력 {% endcomment %}
+            <tbody>
+            {% for board in info %}
+            <tr class="text-center">
+                <td>
+                    <span>{{ board.title }}</span>
+                </td>
+                <td>
+                    <a href="/post/{{ board.id }}">
+                        <span>{{ board.content }}</span>
+                    </a>
+                </td>
+                <td>
+                    <span>{{ board.author }}</span>
+                </td>
+                <td>
+                    <span>{{ board.created_date | date:"Y-m-d h:i" }}</span>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div style='text-align:center;'>
+            <ul class='pagination' style='justify-content: center;''>
+            {% for i in page_range %}
+            <div style="margin: 5px;">
+            <li>
+                <a href='{% url "board:index" %}?page={{ i }}'>
+                    {{ i }}
+                </a>
+            </li>
+        </div>
+            {% endfor %}
+            </ul>
     </div>
-</div>
-<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-</body>
+        <div class="row">
+            <div class="col-auto mr-auto"></div>
+            <div class="col-auto">
+                <a class="btn btn-primary" href="/post" role="button">글쓰기</a>
+            </div>
+        </div>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    </body>
 </html>

@@ -3,13 +3,30 @@ from django.http import HttpResponse, HttpResponseRedirect,Http404
 from .models import *
 from django.urls import reverse
 from django.shortcuts import redirect
-
+from django.contrib import messages
+from django.core.paginator import Paginator
 # Create your views here.
+
+def main(request):
+
+    return render(request,'board/main.html')
 
 # 게시판 목록
 def index(request):
-    boards = {'boards': Board.objects.all()}
-    return render(request, 'board/list.html', boards)
+    now_page = int(request.GET.get('page',1))
+    boards = Board.objects.order_by('-id')
+    p = Paginator(boards,3 )
+    info = p.page(now_page) # info = p.get_page(now_page)
+    start_page = ((now_page - 1) // 10) * 10 + 1
+    end_page = start_page + 9
+    if end_page > p.num_pages:
+        end_page = p.num_pages
+    context = {
+    "info":info,
+    "boards":boards,
+    'page_range' : range(start_page, end_page + 1)
+    }
+    return render(request, 'board/list.html', context)
 
 # 게시판 글쓰기
 def post(request):
@@ -20,20 +37,14 @@ def post(request):
         # null값이 없어야함
         if author and title and content:
             board = Board(author=author, title=title, content=content)
-
             board.save()
             return redirect('/index')
-
-        # null값이면 post계속하기(alert추가해야함)
         else:
+            messages.warning(request,"공란이 없게 해주세요")
             return redirect('/post/')
     else:
         return render(request,'board/post.html')
-def cancel(request):
-    if request.method == "POST":
-        return redirect('/index')
-    else:
-        return render(request,'board/post.html')
+
 # 게시판 상세보기
 def detail(request, id):
     try:
@@ -48,8 +59,7 @@ def board_delete(request,id):
     board.delete()
     return redirect('/index')
 
-
-#게시판 수정
+# 게시판 수정
 def board_edit(request,id):
     board = Board.objects.get(pk=id)
     if request.method == 'POST':
@@ -58,10 +68,13 @@ def board_edit(request,id):
         board.content = request.POST['content']
         board.board = Board(title=board.title, content=board.content)
         board.save()
-        # return redirect('/post/'+str(board.id))
+        return redirect('/post/'+str(board.id))
     else:
         return render(request,'board/update.html',{'board':board})
 
-
-def main(request):
-    return render(request,'board/main.html')
+def cancel(request,id):
+    board = Board.objects.get(pk=id)
+    if request.method == "POST":
+        return redirect('/index')
+    else:
+        return render(request,'board/post.html',{"board":board})
