@@ -1,32 +1,45 @@
-from django.shortcuts import render
-from .models import Room, User
+import json
+from channels.generic.websocket import AsyncWebsocketConsumer
 
+class ChatConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        self.room_name = self.scope['url_route']['kwargs']['room_name']
+        self.room_group_name = 'chat_%s' % self.room_name
 
-# Create your views here.
-def index(request):
-    user_id = request.session.get('user')
-    user_name = User.objects.get(id = user_id)
+        # Join room group
+        await self.channel_layer.group_add(
+            self.room_group_name,
+            self.channel_name
+        )
 
-    ul = User.objects.exclude(id = user_id)
+        await self.accept()
 
-    rl = {}
+    async def disconnect(self, close_code):
+        # Leave room group
+        await self.channel_layer.group_discard(
+            self.room_group_name,
+            self.channel_name
+        )
 
-    for u in ul:
-        s = user_name + u.username 
-        sorted(s)
-        rl[u.id] = s     
-    # user에 따른 고유한 채팅방 주소 생성
+    # Receive message from WebSocket
+    async def receive(self, text_data):
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
 
-    return render(request, 'chat/index.html', {
-        'me' : user_id,
-        'ul' : ul,
-        'rl' : rl
-    })
+        # Send message to room group
+        await self.channel_layer.group_send(
+            self.room_group_name,
+            {
+                'type': 'chat_message',
+                'message': message
+            }
+        )
 
-def room(request, room_name):
-    return render(request, 'chat/room.html', {
-        'room_name': room_name
-    })
+    # Receive message from room group
+    async def chat_message(self, event):
+        message = event['message']
 
-def blank(request):
-    return render(request, 'chat/blank.html')
+        # Send message to WebSocket
+        await self.send(text_data=json.dumps({
+            'message': message
+        }))
