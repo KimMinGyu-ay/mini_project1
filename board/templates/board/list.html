@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
 </head>
 <body>
+{% include "board/navi_bar.html" %}
+{% block content %}
+{% endblock %}
 <header>
     <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
         <div class="container d-flex justify-content-between">
-            <a href="/index/" class="navbar-brand d-flex align-items-center"><strong> 게시판</strong>
-            {% comment %} <a href="/" class="navbar-brand d-flex align-items-center"> {% endcomment %}
-               
+            <a href="/index/" class="navbar-brand d-flex align-items-center">
+                <strong>게시판 목록</strong>
             </a>
         </div>
     </div>
