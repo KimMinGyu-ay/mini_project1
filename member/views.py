@@ -10,8 +10,8 @@ def signup(request):
     if request.method == 'POST':        
         if request.POST['password1'] == request.POST['password2']:
             new_user = User.objects.create_user(username=request.POST['username'],password=request.POST['password1'],email=request.POST['email'])
-            login(request, new_user)            
-            return redirect('user_login')
+            #login(request, new_user)            
+            return redirect('/member/login')
         else:
             return HttpResponse('잘못 입력하였습니다')
     else:        
@@ -35,6 +35,6 @@ def signin(request):
 
 def signout(request):
     logout(request)
-    return redirect('user_login')        
+    return redirect('/member/login/')        
 
 
