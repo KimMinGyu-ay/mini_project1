@@ -60,3 +60,7 @@ def board_edit(request,id):
         # return redirect('/post/'+str(board.id))
     else:
         return render(request,'board/update.html',{'board':board})
+
+
+    def main(request):
+        return render(request,'board/main.html')
