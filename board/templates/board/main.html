@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
   <title>AIVLE 최강4반 통장잔고 1조</title>
   <meta charset="utf-8">
@@ -20,9 +20,9 @@
 </head>
 <body>
 
-<div class="jumbotron text-center" style="margin-bottom:0" >
-  <h1 style="color: #FB7A01;">펫투유</h1>
-  <p></p>
+<div class="jumbotron text-center" style="margin-bottom:0" href="/main">
+  <h1><a href="/main" style="color: #FB7A01;">펫투유</a></h1>
+  <br>
   <p>펫투유는 django를 활용하여 회원간의 소통, 주변가게 검색을 목적으로 하는 웹사이트입니다.</p> 
 </div>
 
@@ -39,7 +39,7 @@
         <a class="nav-link" href="../index">게시물 작성</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="../chat/room">채팅</a>
+        <a class="nav-link" href="../chat/index">채팅 하기</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="../gps/shop">주변 가게 검색</a>
@@ -64,22 +64,22 @@
     <div class="col-sm-4">
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link active" href="#">PET_TO_YOU</a> 
+          <a class="nav-link active" href="/main">PET_TO_YOU</a> 
           <!-- 홈 화면으로 -->
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="#">수도권 4반 1조</a>
+          <a class="nav-link disabled">수도권 4반 1조</a>
           <!-- 반 조이름 -->
         </li>
         <!-- 각 기능별 링크  -->
         <li class="nav-item">
-          <a class="nav-link" href="#">게시물 작성</a>
+          <a class="nav-link" href="../index">게시물 작성</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">채팅</a>
+          <a class="nav-link" href="../chat/index">채팅 하기</a>
         </li>
         <li class="nav-item" sfloat:right>
-          <a class="nav-link" href="#">주변 가게 검색</a>
+          <a class="nav-link" href="../gps/shop">주변 가게 검색</a>
         </li>
       </ul>
       <hr class="d-sm-none">
