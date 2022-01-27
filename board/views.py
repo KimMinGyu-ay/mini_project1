@@ -8,7 +8,6 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 def main(request):
-
     return render(request,'board/main.html')
 
 # 게시판 목록
@@ -78,3 +77,4 @@ def cancel(request,id):
         return redirect('/index')
     else:
         return render(request,'board/post.html',{"board":board})
+    

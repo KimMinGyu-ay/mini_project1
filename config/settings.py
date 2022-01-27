@@ -31,10 +31,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'channels',
+    # 'channels',
     'member',
     'board',   
-    'chat',
+    # 'chat',
     'gps',
     'django.contrib.admin',
     'django.contrib.auth',
