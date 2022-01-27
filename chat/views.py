@@ -1,21 +1,21 @@
-from django.shortcuts import render
-from .models import Room, User
+from django.shortcuts import redirect, render
+from .models import User
 
 
 # Create your views here.
 def index(request):
-    user_id = request.session.get('user')
+    user_id = request.session.get('user_id')
     user_name = User.objects.get(id = user_id)
 
     ul = User.objects.exclude(id = user_id)
 
     rl = {}
 
-    for u in ul:
-        s = user_name + u.username 
-        sorted(s)
-        rl[u.id] = s     
-    # user에 따른 고유한 채팅방 주소 생성
+    # 고유한 주소 생성
+    # for u in ul:
+    #     s = str(user_name) + str(u.username) 
+    #     sorted(s)
+    #     rl[u.id] = s     
 
     return render(request, 'chat/index.html', {
         'me' : user_id,

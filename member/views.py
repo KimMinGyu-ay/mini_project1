@@ -27,7 +27,8 @@ def signin(request):
         user = authenticate(username = username, password = password)
         
         if user is not None:
-            login(request,user)            
+            login(request,user)
+            request.session['user_id'] = user.id           
             return redirect('/index')
         else:
             return HttpResponse('ERROR: Username or Password is incorrent.')

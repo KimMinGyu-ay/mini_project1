@@ -26,9 +26,9 @@ urlpatterns = [
     path('', include('board.urls')),
     path('admin/', admin.site.urls),
     
-    #chat urls
-    #path('chat/', include('chat.urls')),
+    # chat urls
+    path('chat/', include('chat.urls')),
     
     #gps urls
-    path('gps/', include('gps.urls')),
+    # path('gps/', include('gps.urls')),
 ]
