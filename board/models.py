@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 class Board(models.Model):
     #board_id = models.IntegerField(primary_key=True)
-    postno = models.IntegerField(primary_key=True, null=False, default=0)
+    postno = models.AutoField(primary_key=True)
     author = models.CharField(max_length=10, null=False) # 작성자 이름 
     title = models.CharField(max_length=100, null=False) # 게시판 제목
     content = models.TextField(null=False) # 내용

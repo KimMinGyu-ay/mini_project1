@@ -20,6 +20,7 @@ def post(request):
         # null값이 없어야함
         if author and title and content:
             board = Board(author=author, title=title, content=content)
+
             board.save()
             return redirect('/index')
 
