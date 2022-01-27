@@ -13,14 +13,21 @@
     {% include "board/navi_bar.html" %}
     {% block content %}
     {% endblock %}
-    {% block side %}
-    {% endblock %}
+    <header>
+        <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
+            <div class="container d-flex justify-content-between">
+                <a href="/index/" class="navbar-brand d-flex align-items-center">
+                    <h2><strong>회원가입 화면</strong></h2>
+                </a>
+            </div>
+        </div>
+    </header>
     <div class="content container">
-        <header class="page-header">
-            <h1>회원 가입</h1>
-        </header>
         <div class="row">
-            <div class="col-md-16">
+            {% include "board/side_bar.html" %}
+            {% block side %}
+            {% endblock %}
+            <div class="col-md-8">
                 <form method="POST">
                     {% csrf_token %}
                     <div class="form-group">
