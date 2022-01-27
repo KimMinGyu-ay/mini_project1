@@ -11,8 +11,7 @@ def signup(request):
         form = UserForm(request.POST)
         if form.is_valid():                              
             new_user = User.objects.create_user(**form.cleaned_data)
-            login(request, new_user)
-            form.save()
+            login(request, new_user)            
             return redirect('user_login')
         else:
             return HttpResponse('잘못 입력하였습니다')
