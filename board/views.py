@@ -14,7 +14,7 @@ def main(request):
 def index(request):
     now_page = int(request.GET.get('page',1))
     boards = Board.objects.order_by('-id')
-    p = Paginator(boards,3 )
+    p = Paginator(boards,6 )
     info = p.page(now_page) # info = p.get_page(now_page)
     start_page = ((now_page - 1) // 10) * 10 + 1
     end_page = start_page + 9
