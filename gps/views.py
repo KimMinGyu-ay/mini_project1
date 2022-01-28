@@ -6,6 +6,3 @@ from django.shortcuts import render
 def shop(request):
     return render(request,'gpsapp/shop.html')
 
-def nav(request):
-    return render(request,'gpsapp/nav.html')
-
