@@ -25,7 +25,6 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username = username, password = password)
-        print(user.id)
         
         # session_id = request.session.session_key
     
