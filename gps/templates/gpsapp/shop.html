@@ -176,7 +176,7 @@
     longitude = 126.570667
     function reply_click(clicked_value){
         tag = clicked_value
-        keyword.value = address[3] + " " + tag
+        keyword.value = address[address.length-1] + " " + tag
         // alert(tag);
         searchPlaces();
         // 지도 목록 검색해주는 함수 실행
