@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>게시판 - 글쓰기</title>
+    <title>사용자 위치 기반 shop 검색</title>
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
     <style>
 
@@ -122,41 +122,10 @@
     {% include "board/side_bar.html" %}
     {% block side %}
     {% endblock %}
-    {% comment %} <header>
-        <div class="navbar navbar-dark bg-dark shadow-sm mb-3">
-            <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
-                <strong>PET_TO_YOU</strong>
-            </a>
-            <div class="container d-flex justify-content-between">
-                <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
-                    <strong>게시판</strong>
-                </a>
-
-                <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
-                    <strong>CHAT</strong>
-                </a>
-
-                <a href="/gps/shop" class="navbar-brand row-vh d-flex align-items-right">
-                    <strong>GPS</strong>
-                </a>
-
-                <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
-                    <strong>내정보 조회</strong>
-                </a>
-            </div>
-        <a href="/index/" class="navbar-brand row-vh d-flex align-items-right">
-            <strong>로그인</strong>
-        </a>
-
-        </div>
-    </header> {% endcomment %}
     <div class="container">
         <div id="address">
             <div id="map" style="width:0px;height:0px;position:relative;overflow:hidden;"></div>
-            <div>
-                {% comment %} <div class="title">지도중심기준 행정동 주소정보</div> {% endcomment %}
-                {% comment %} <span id="centerAddr"></span> {% endcomment %}
-            </div>
+
         <div>
         
         <div class="map_wrap">
@@ -170,7 +139,6 @@
                     <input type="text" id="my_address" size="29" disabled> 
                     <div id="centerAddr"> </div> 
                 </div>
-                {% comment %} document.getElementById(my_address).value {% endcomment %}
                     
                 <div style="margin-top:15px">
                     <button id="btn1" value="애견카페" onclick="reply_click(this.value)">#카페</button>
@@ -204,7 +172,8 @@
 
     var search = ""
     var tag = ""
-    
+    latitude = 33.450701
+    longitude = 126.570667
     function reply_click(clicked_value){
         tag = clicked_value
         keyword.value = address[3] + " " + tag
@@ -236,8 +205,8 @@
 
     var mapContainer2 = document.getElementById('map2'), // 지도를 표시할 div 
         mapOption2 = { 
-            center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 3 // 지도의 확대 레벨
+            center: new kakao.maps.LatLng(latitude, longitude), // 지도의 중심좌표
+            level: 1 // 지도의 확대 레벨
       };  
 
     // 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -262,7 +231,8 @@
             
             // 지도 중심을 부드럽게 이동시킵니다
             // 만약 이동할 거리가 지도 화면보다 크면 부드러운 효과 없이 이동합니다
-            map.panTo(moveLatLon); 
+            map.panTo(moveLatLon);
+            map2.panTo(moveLatLon);
             alert.addres        
         });              
     } 

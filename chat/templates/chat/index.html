@@ -9,15 +9,14 @@
 
   <body>
     {% include "board/navi_bar.html" %}
-
     {% block content %}
     {% endblock %}
 
-    {% include "board/side_bar.html" %}
-    {% block side %}
-    {% endblock %}
+
     <section class="section">
-        
+      {% include "board/side_bar.html" %}
+      {% block side %}
+      {% endblock %}        
         <div class="container">
             <div class="columns is-multiline">
               <div class="column is-6 is-offset-3 mb-6">
