@@ -1,9 +1,24 @@
+from tkinter import CASCADE
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.contrib.sessions.models import Session
 
-# class Room(models.Model):
-#     id = models.BigAutoField(primary_key=True, verbose_name=("Id"))
-#     join1 = models.ForeignKey(User, on_delete=models.CASCADE)
-#     join2 = models.ForeignKey(User,  on_delete=models.CASCADE) # 방이름
+class Room(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20, default="")
+    class Meta:
+        db_table = 'room'
+        app_label = 'chat'
+
+class Message(models.Model):
+    id = models.AutoField(primary_key=True)
+    username = models.CharField(max_length=255)
+    room = models.CharField(max_length=255)
+    content = models.TextField(default="")
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_added',)
+        db_table = 'message'
+        app_label = 'chat'
