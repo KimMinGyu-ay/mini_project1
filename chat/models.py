@@ -1,8 +1,5 @@
-from tkinter import CASCADE
 from django.db import models
-from django.conf import settings
 from django.contrib.auth.models import User
-from django.contrib.sessions.models import Session
 
 class Room(models.Model):
     id = models.AutoField(primary_key=True)
