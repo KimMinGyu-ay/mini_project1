@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from .models import User, Room, Message
 from django.db.models import Q
 
-# Create your views here.
+# 메인 화면으로 지정 - 채팅 방 검색
 def index(request):
 
     return render(request, 'chat/index.html',)
@@ -18,6 +18,3 @@ def room(request, room_name):
         'username': username,
         'messages': messages
     })
-
-def blank(request):
-    return render(request, 'chat/blank.html')
