@@ -12,6 +12,7 @@ def main(request):
 
 # 게시판 목록
 def index(request):
+    author =request.session.get('login_session', request.user.get_username())
     now_page = int(request.GET.get('page',1))
     boards = Board.objects.order_by('-id')
     p = Paginator(boards,6 )
@@ -23,6 +24,7 @@ def index(request):
     context = {
     "info":info,
     "boards":boards,
+    "author":author,
     'page_range' : range(start_page, end_page + 1)
     }
     return render(request, 'board/list.html', context)
