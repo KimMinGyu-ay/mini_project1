@@ -1,10 +1,12 @@
 from django.http import HttpResponse
 from django.contrib.auth import authenticate
+from pytest import Session
 from .forms import LoginForm
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login,logout
 from .forms import UserForm
+
 
 def signup(request):
     if request.method == 'POST':        
@@ -23,11 +25,23 @@ def signin(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username = username, password = password)
+        print(user.id)
         
-        if user is not None:
+        # session_id = request.session.session_key
+    
+        if user is not None:  # is_valid()
+         
             login(request,user)
-            request.session['user_id'] = user.id           
-            return redirect('/main')
+            
+            request.session['user_id'] = username
+            user_id = request.session['user_id']
+            session_id=request.session.session_key
+            contents = {
+                'session_id' : session_id,
+                'user_id' : user_id
+            }    
+              
+            return redirect('/main',contents)
         else:
             return HttpResponse('ERROR: Username or Password is incorrent.')
     else:        
