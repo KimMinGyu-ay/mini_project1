@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="ko">
 <head>
   <title>AIVLE 최강4반 통장잔고 1조</title>
@@ -93,8 +94,11 @@
     
     <div class="col-sm-8">
       <h2>게시판</h2>
-      <div class="fakeimg">Fake Image</div>
-      <p>django와 DB를 활용하여 회원정보를 통해서 게시물을 작성하고 수정, 삭제가 가능합니다.</p>
+      
+      <div class="fakeimg" ><img src="{%static 'img/board_list_image.png' %}" width="730" height="200px"></div>
+      django와 DB를 활용하여 회원정보를 통해서 게시물을 작성하고 수정, 삭제가 가능합니다.</p>
+      
+      
       <br>
       
       <h2>채팅</h2>
