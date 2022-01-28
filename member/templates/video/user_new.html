@@ -22,11 +22,12 @@
             </div>
         </div>
     </header>
+    {% include "board/side_bar.html" %}
+    {% block side %}
+    {% endblock %}
+
     <div class="content container">
         <div class="row">
-            {% include "board/side_bar.html" %}
-            {% block side %}
-            {% endblock %}
             <div class="col-md-8">
                 <form method="POST">
                     {% csrf_token %}
@@ -48,17 +49,16 @@
                     </div>     
                     <button type="submit" class="btn btn-default">Submit</button>
                 </div>                
-                <img src="dogplay.jpg" width="1170" height="300"/>
                 </form>
             </div>
-        </div>
-        <div style="margin-top:30px">
-            <img src="{%static 'img/PET_TO_YOU.jpg' %}" width="1170" height="500"/>
+            <div style="margin-top:30px">
+                <img src="{%static 'img/ean.jpg' %}" width="100%" height="700"/>
+            </div>
         </div>
     </div>
     {% include "board/bottom.html" %}
-{% block bottom %}
-{% endblock %}
+    {% block bottom %}
+    {% endblock %}
 </body>
 
 </html>

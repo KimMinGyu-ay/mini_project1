@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 from django.conf.urls.static import static
 from django.conf import settings
-
+app_name ='member'
 urlpatterns = [
     path('login/', views.signin, name='user_login'),
     path('signup/', views.signup, name='user_signup'),
