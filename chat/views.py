@@ -18,6 +18,3 @@ def room(request, room_name):
         'username': username,
         'messages': messages
     })
-
-def blank(request):
-    return render(request, 'chat/blank.html')
